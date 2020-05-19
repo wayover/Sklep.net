@@ -1,0 +1,46 @@
+﻿@using System.Diagnostics.CodeAnalysis
+@model IEnumerable<WebApplication3.Models.Tranzakcje>
+
+@{
+    ViewBag.Title = "Koszyk";
+}
+
+<h2>Koszyk</h2>
+
+
+
+<table id="tranzakcje" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nazwa produktu</th>
+            <th>Cena produktu</th>
+            <th>Data</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var tranzakcje in Model)
+        {
+            <tr>
+
+                <td>@tranzakcje.Nazwa</td>
+                <td>@tranzakcje.Cena</td>
+                <td>@tranzakcje.Date</td>
+                <td>
+                    <center>
+                    @Html.ActionLink("Usuń", "Delete", "Tranzakcjes", new { id = tranzakcje.Id }, new { @class = "btn btn-primary" })</center>
+                </td>
+
+
+
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@Html.ActionLink("Kup", "Dane", "Kupiones", null, new { @class = "btn btn-primary" })

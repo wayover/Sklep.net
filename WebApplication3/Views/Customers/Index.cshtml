@@ -1,0 +1,36 @@
+﻿@using WebApplication3.Models
+@model IEnumerable<WebApplication3.Models.Customer>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Użytkownicy</h2>
+@if (!Model.Any())
+{
+    <p>Nie ma żadnego użytkownika</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Imie</th>
+                <th>Nazwisko</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+                    <td>@customer.SurName</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}

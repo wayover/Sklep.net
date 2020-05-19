@@ -1,0 +1,38 @@
+﻿@model WebApplication3.Models.Przedmiot
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><b>@Model.Nazwa</b></h2>
+<br /><br />
+
+
+
+
+
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Producent</th>
+            <th>Cena</th>
+            <th>Opis</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+
+        <tr>
+            <td>@Model.Producent.Nazwa</td>
+            <td>@Model.Cena</td>
+        <td>@Model.Opis</td>
+
+
+
+
+    </tbody>
+</table>

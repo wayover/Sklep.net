@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<center>  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG88XgKi2PKC8kvuTu5DLo7vcJZGrTPY9dIbuRdmzMqsub0motvA&s" /> </center>
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <h2>Kontakt</h2>
+        <p>
+            Brakuje jakiegoś przedmiotu?<br />
+            Masz do nas jakeiś pytania?<br />
+            Skontaktuj się z nami
+        </p>
+        <p>@Html.ActionLink("Kontakt", "Contact", "Home", new { area = "" }, new { @class = "btn btn-primary" })</p>
+    </div>
+
+
+
+    <div class="col-md-4">
+        <h2>Sklep Stacjonarny</h2>
+        <p>Zapraszamy do naszego sklepu stacjonarnego!</p>
+
+        <p>@Html.ActionLink("Adres sklepu", "About", "Home", new { area = "" }, new { @class = "btn btn-primary" })</p>
+    </div>
+
+</div>
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<center>  <img src="https://www.weednews.pl/wp-content/uploads/2018/05/rek1.png" /> </center>

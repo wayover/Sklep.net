@@ -1,0 +1,20 @@
+﻿@model WebApplication3.Models.Kategoria
+@{
+    ViewBag.Title = "Dodawanie Kategorii";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nowa Kategoria</h2>
+
+@using (Html.BeginForm("Save", "Kategorias"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nazwa)
+        @Html.TextBoxFor(m => m.Nazwa, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Nazwa)
+    </div>
+
+
+    @Html.HiddenFor(m => m.Id)
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+}

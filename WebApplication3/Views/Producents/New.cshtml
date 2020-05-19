@@ -1,0 +1,20 @@
+﻿@model WebApplication3.Models.Producent
+@{
+    ViewBag.Title = "Dodawanie producenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nowy Producent</h2>
+
+@using (Html.BeginForm("Save", "Producents"))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.Nazwa)
+    @Html.TextBoxFor(m => m.Nazwa, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Nazwa)
+</div>
+
+
+    @Html.HiddenFor(m => m.Id)
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+}

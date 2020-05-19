@@ -1,0 +1,118 @@
+﻿@using WebApplication3.Models
+@model IEnumerable<WebApplication3.Models.Przedmiot>
+
+
+@{
+    ViewBag.Title = "Przedmioty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>
+
+
+
+<h2>Przedmioty</h2>
+
+<table id="przedmiots" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Kategoria</th>
+            <th>Producent</th>
+            <th>Cena</th>
+            <th>Opis</th>
+            <th>Usuń</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+
+    @Html.ActionLink("Dodaj Przedmiot", "New", "Przedmiots",null, new { @class = "btn btn-primary" })
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            var table=$("#przedmiots").DataTable({
+                ajax: {
+                    url: "/api/przedmiots",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "nazwa",
+                        render: function (data, type, przedmiot) {
+                            return "<a href='/przedmiots/edit/" + przedmiot.id + "'>" + przedmiot.nazwa + "</a>";
+                        }
+                    },
+                    {
+                        data: "kategoria.nazwa"
+                    },
+                    {
+                        data: "producent.nazwa"
+                    },
+                    {
+                        data: "cena"
+                    },
+                    {
+                        data: "opis"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-przedmiot-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+            $("#przedmiots").on("click", ".js-delete", function () {
+                    var button = $(this);
+                    if (confirm("Czy na pewno chcesz usunąć przedmiot  ?")) {
+                        $.ajax({
+                            url: "/api/przedmiots/" + button.attr("data-przedmiot-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+

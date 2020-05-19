@@ -1,0 +1,74 @@
+﻿@model IEnumerable<WebApplication3.Models.Producent>
+
+
+@{
+    ViewBag.Title = "Producenci";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>
+
+
+<h2>Producenci</h2>
+
+@if (!Model.Any())
+{
+    <p>Nie ma żadnego Producenta</p>
+}
+
+<table id="producents" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Producent</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var producent in Model)
+        {
+            <tr>
+
+                <td>@Html.ActionLink(producent.Nazwa, "Edit", "Producents", new { id = producent.Id }, null)</td>
+                <td>
+                    <button data-producent-id="@producent.Id" data-producent-name="@producent.Nazwa" class="js-delete">Usuń</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@Html.ActionLink("Dodaj Producenta", "New", "Producents", null, new { @class = "btn btn-primary" })
+
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#producents .js-delete").on("click",
+                function () {
+                    var button = $(this);
+                    if (confirm("Czy na pewno chcesz usunąć producenta " + button.attr("data-producent-name") + "?")) {
+                        $.ajax({
+                            url: "/api/producents/" + button.attr("data-producent-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+        })
+    </script>
+}

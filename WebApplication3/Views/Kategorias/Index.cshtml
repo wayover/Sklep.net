@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebApplication3.Models.Kategoria>
+
+
+@{
+    ViewBag.Title = "Kategorie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+
+    .field-validation-error {
+        color: red;
+    }
+
+    .input-validation-error {
+        border: 2px solid red;
+    }
+</style>
+
+<h2>Kategorie</h2>
+
+
+@if (!Model.Any())
+{
+    <p>Nie ma żadnej kategori</p>
+}
+<table id="kategorias" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Kategoria</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kategoria in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(kategoria.Nazwa, "Edit", "Kategorias", new { id = kategoria.Id }, null)</td>
+                <td>
+                    <button data-kategoria-id="@kategoria.Id" data-kategoria-name="@kategoria.Nazwa" class="js-delete">Usuń</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@Html.ActionLink("Dodaj Kategorie", "New", "Kategorias", null, new { @class = "btn btn-primary" })
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#kategorias .js-delete").on("click",
+                function () {
+                    var button = $(this);
+                    if (confirm("Czy na pewno chcesz usunąć kategorie " + button.attr("data-kategoria-name") + "?")) {
+                        $.ajax({
+                            url: "/api/kategorias/" + button.attr("data-kategoria-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+        })
+    </script>
+}

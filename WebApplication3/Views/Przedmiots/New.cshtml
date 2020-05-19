@@ -1,0 +1,52 @@
+﻿@model WebApplication3.ViewModels.NewPrzedmiotViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nowy Przedmiot</h2>
+
+@using (Html.BeginForm("Save", "Przedmiots"))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.Przedmiot.Nazwa)
+    @Html.TextBoxFor(m => m.Przedmiot.Nazwa, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Przedmiot.Nazwa)
+</div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Przedmiot.KategoriaId)
+        @Html.DropDownListFor(m => m.Przedmiot.KategoriaId, new SelectList(Model.Kategoria, "Id", "Nazwa"), "Wybierz Kategorie", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Przedmiot.KategoriaId)
+        </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Przedmiot.ProducentId)
+        @Html.DropDownListFor(m => m.Przedmiot.ProducentId, new SelectList(Model.Producent, "Id", "Nazwa"), "Wybierz Producenta", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Przedmiot.ProducentId)
+        </div>
+
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Przedmiot.Cena)
+        @Html.TextBoxFor(m => m.Przedmiot.Cena, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Przedmiot.Cena)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Przedmiot.Opis)
+        @Html.TextBoxFor(m => m.Przedmiot.Opis, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Przedmiot.Zdjecie)
+        @Html.TextBoxFor(m => m.Przedmiot.Zdjecie, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m=>m.Przedmiot.ID)
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+}
